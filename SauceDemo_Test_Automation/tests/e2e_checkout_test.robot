@@ -3,9 +3,9 @@ Library          SeleniumLibrary
 Resource         ../config/settings.robot
 Resource         ../variables/common_variables.robot
 Resource         ../resources/keywords/common_keywords.robot
+Resource         ../resources/keywords/product_workflows.robot
+Resource         ../resources/keywords/checkout_steps.robot
 Resource         ../resources/page_objects/login_page.robot
-Resource         ../resources/page_objects/products_page.robot
-Resource         ../resources/page_objects/cart_page.robot
 Resource         ../resources/page_objects/checkout_page.robot
 Test Setup       Setup Test Environment
 Test Teardown    Teardown Test Environment
