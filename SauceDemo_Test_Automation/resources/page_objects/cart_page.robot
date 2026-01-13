@@ -2,6 +2,7 @@
 Documentation    Page Object for SauceDemo Cart Page
 Library          SeleniumLibrary
 Resource         ../keywords/common_keywords.robot
+Resource         ../page_objects/products_page.robot
 
 
 *** Variables ***
@@ -34,11 +35,26 @@ Get Cart Item Count
 Click Checkout Button
     [Documentation]    Clicks the checkout button and handles any browser dialogs
     Element Should Be Clickable    ${CHECKOUT_BUTTON}
-    Click Button    ${CHECKOUT_BUTTON}
-    
+    Click Button    ${CHECKOUT_BUTTON}  
     Sleep    0.5s    # Wait for dialog to appear
-    Press Keys    None    ESC
+    Press Keys    None    ESC   
     
     # Wait for navigation to checkout page
     Wait Until Location Contains    checkout-step-one.html    timeout=10s
+
+Add Product to Cart
+    [Documentation]  Add product to cart
+    Verify Products Page Is Displayed
+    ${PRODUCT_NAME}=    Add First Product To Cart
+    Set Test Variable    ${PRODUCT_NAME}
+    Verify Cart Badge Count    1
+
+Go to Cart and Verify
+    [Documentation]    View shopping cart 
+    [Arguments]   ${PRODUCT_NAME}
+    Click Shopping Cart
+    Verify Cart Page Is Displayed
+    Verify Product In Cart    ${PRODUCT_NAME}
+    ${cart_count}=    Get Cart Item Count
+    Should Be Equal As Numbers    ${cart_count}    1
 
