@@ -7,6 +7,18 @@ Resource         ../../variables/common_variables.robot
 
 
 *** Keywords ***
+Setup Test Environment
+    [Documentation]    Prepares the test environment before each test
+    Log    Starting test execution...    console=True
+    Set Selenium Speed    ${SELENIUM_SPEED}
+
+Teardown Test Environment
+    [Documentation]    Cleans up after test execution
+    Run Keyword If Test Failed    Log    Test failed! Check screenshots for details.    console=True
+    Run Keyword If Test Passed    Log    Test passed successfully!    console=True
+    Capture Screenshot On Failure
+    Close Browser Session
+    
 Open Browser To URL
     [Documentation]    Opens browser with custom options and navigates to the specified URL
     [Arguments]    ${url}    ${browser}=${BROWSER}
@@ -19,11 +31,6 @@ Open Browser To URL
 Close Browser Session
     [Documentation]    Closes the current browser session
     Close Browser
-
-Wait Until Page Is Ready
-    [Documentation]    Waits until the page is fully loaded
-    Wait Until Element Is Not Visible    css:div.loading    timeout=10s
-    Sleep    0.5s
 
 Capture Screenshot On Failure
     [Documentation]    Captures screenshot when test fails
