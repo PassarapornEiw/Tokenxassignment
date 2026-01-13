@@ -24,7 +24,6 @@ Open Browser To URL
     [Arguments]    ${url}    ${browser}=${BROWSER}
     ${options}=    Get Chrome Options With Disabled Popups
     Open Browser    ${url}    ${browser}    options=${options}
-    Maximize Browser Window
     Set Selenium Timeout    ${TIMEOUT}
     Set Selenium Implicit Wait    ${IMPLICIT_WAIT}
 
@@ -41,4 +40,5 @@ Element Should Be Clickable
     [Arguments]    ${locator}
     Wait Until Element Is Visible    ${locator}
     Wait Until Element Is Enabled    ${locator}
+
 
